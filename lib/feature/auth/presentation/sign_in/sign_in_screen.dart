@@ -11,10 +11,9 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authBloc = BlocProvider.of<AuthBloc>(context);
+    final authBloc = context.read<AuthBloc>();
     TextEditingController email = TextEditingController();
     TextEditingController password = TextEditingController();
-    bool showPassword = false;
 
 
     phoneField() {
@@ -24,25 +23,25 @@ class SignInScreen extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             width: 1,
-            color: Color(0xFF225196),
+            color: const Color(0xFF225196),
           ),
           borderRadius: BorderRadius.circular(10),
         ),
         child: TextField(
           controller: email,
           keyboardType: TextInputType.emailAddress,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xFF225196),
             fontSize: 16,
           ),
           decoration: InputDecoration(
             hintStyle: TextStyle(
-              color: Color(0xFF225196).withOpacity(0.5),
+              color: const Color(0xFF225196).withOpacity(0.5),
             ),
             hintText: 'Email',
             border: InputBorder.none,
-            prefixIcon: Padding(
-                padding: const EdgeInsets.only(
+            prefixIcon: const Padding(
+                padding: EdgeInsets.only(
                     left: 18, top: 11, right: 13, bottom: 12),
                 child: Icon(
                   Icons.email_outlined,
@@ -53,41 +52,6 @@ class SignInScreen extends StatelessWidget {
         ),
       );
     }
-    /*ipField() {
-      return Container(
-        width: 300,
-        height: 55,
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 1,
-            color: Color(0xFF225196),
-          ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: TextField(
-          controller: ip,
-          style: TextStyle(
-            color: Color(0xFF225196),
-            fontSize: 16,
-          ),
-          decoration: InputDecoration(
-            hintStyle: TextStyle(
-              color: Color(0xFF225196).withOpacity(0.5),
-            ),
-            hintText: 'IP adress',
-            border: InputBorder.none,
-            prefixIcon: Padding(
-                padding: const EdgeInsets.only(
-                    left: 18, top: 11, right: 13, bottom: 12),
-                child: Icon(
-                  Icons.settings,
-                  color: Color(0xFF225196),
-                  size: 19,
-                )),
-          ),
-        ),
-      );
-    }*/
     passwordField() {
       return Container(
         width: 300,
@@ -95,25 +59,25 @@ class SignInScreen extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             width: 1,
-            color: Color(0xFF225196),
+            color: const Color(0xFF225196),
           ),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: 250,
               child: TextField(
                 controller: password,
-                obscureText: showPassword,
+                obscureText: true,
                 obscuringCharacter: '*',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Color(0xFF225196),
                   fontSize: 16,
                 ),
                 decoration: InputDecoration(
                   hintStyle: TextStyle(
-                    color: Color(0xFF225196).withOpacity(0.5),
+                    color: const Color(0xFF225196).withOpacity(0.5),
                   ),
                   hintText: 'Пароль',
                   border: InputBorder.none,
@@ -123,18 +87,6 @@ class SignInScreen extends StatelessWidget {
                     child: Image.asset('assets/img/iconPassword.png'),
                   ),
                 ),
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: showPassword
-                  ? Icon(
-                Icons.remove_red_eye_outlined,
-                color: Color(0xFF225196),
-              )
-                  : Icon(
-                Icons.remove_red_eye_rounded,
-                color: Color(0xFF225196),
               ),
             )
           ],
@@ -146,7 +98,7 @@ class SignInScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 85,
               ),
               Image.asset(
@@ -154,38 +106,34 @@ class SignInScreen extends StatelessWidget {
                 width: 148,
                 height: 148,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 34,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 23,
               ),
               phoneField(),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               passwordField(),
-              SizedBox(
-                height: 20,
-              ),
-              // ipField(),
-              SizedBox(
-                height: 20,
+              const SizedBox(
+                height: 40,
               ),
               BlocBuilder(
                 bloc: authBloc,
                 builder: (context, state) {
                   if(state is SuccessfullySignInState){
-                    AutoRouter.of(context).replace(const ProductListRoute());
+                    AutoRouter.of(context).replace(const DashboardRoute());
                   }
                   if(state is LoadingAuthState){
                     return Ink(
                       width: 163,
                       height: 45,
                       decoration: BoxDecoration(
-                          color: Color(0xFF225196),
+                          color: const Color(0xFF225196),
                           borderRadius: BorderRadius.circular(30)),
-                      child: Center(
+                      child: const Center(
                           child: CircularProgressIndicator()),
                     );
                   }
@@ -193,16 +141,16 @@ class SignInScreen extends StatelessWidget {
                     return Column(
                       children: [
 
-                        Container(
+                        SizedBox(
                           width: MediaQuery.of(context).size.width*0.8,
                           child: Center(
                             child: Text(
-                              '${state.error.toString()}',
-                              style: TextStyle(color: Color(0xFF225196), fontSize: 16),
+                              state.error.toString(),
+                              style: const TextStyle(color: Color(0xFF225196), fontSize: 16),
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         InkWell(
                           onTap: () {
                             authBloc.add(SignInEvent(userAuth: UserAuth(email: email.text,password: password.text)));
@@ -211,9 +159,9 @@ class SignInScreen extends StatelessWidget {
                             width: 163,
                             height: 45,
                             decoration: BoxDecoration(
-                                color: Color(0xFF225196),
+                                color: const Color(0xFF225196),
                                 borderRadius: BorderRadius.circular(30)),
-                            child: Center(
+                            child: const Center(
                                 child: Text(
                                   'Войти',
                                   style: TextStyle(color: Colors.white, fontSize: 16),
@@ -231,9 +179,9 @@ class SignInScreen extends StatelessWidget {
                       width: 163,
                       height: 45,
                       decoration: BoxDecoration(
-                          color: Color(0xFF225196),
+                          color: const Color(0xFF225196),
                           borderRadius: BorderRadius.circular(30)),
-                      child: Center(
+                      child: const Center(
                           child: Text(
                             'Войти',
                             style: TextStyle(color: Colors.white, fontSize: 16),
@@ -243,24 +191,24 @@ class SignInScreen extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 15),
-              SizedBox(height: 80),
-              SizedBox(
+              const SizedBox(height: 80),
+              const SizedBox(
                 height: 15,
               ),
               GestureDetector(
                   onTap: () {},
-                  child: Text(
+                  child: const Text(
                     'Не можете войти?',
                     style: TextStyle(color: Color(0xFF225196), fontSize: 12),
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               GestureDetector(
                   onTap: () {
                     AutoRouter.of(context).replace(const SignUpRoute());
                   },
-                  child: Text(
+                  child: const Text(
                     'Зарегистрироваться',
                     style: TextStyle(color: Color(0xFF225196), fontSize: 16),
                   )),

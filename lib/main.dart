@@ -7,6 +7,6 @@ void main() {
 
   configureDependencies();
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 

@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_mall_flutter_bloc/core/auto_route/auto_route.dart';
 
 
@@ -21,17 +20,17 @@ class _EmailVerifyState extends State<EmailVerify> {
   }
   TextEditingController kod=TextEditingController();
 
-  void showToast() => Fluttertoast.showToast(
+ /* void showToast() => Fluttertoast.showToast(
       msg: "Регистрация завершено!",
       fontSize: 18,
-      gravity: ToastGravity.BOTTOM);
+      gravity: ToastGravity.BOTTOM);*/
 
-  void cancelToast(String msgError) => Fluttertoast.showToast(
+  /*void cancelToast(String msgError) => Fluttertoast.showToast(
       msg: msgError,
       fontSize: 18,
       gravity: ToastGravity.BOTTOM,
       backgroundColor: Colors.red,
-      textColor: Colors.white);
+      textColor: Colors.white);*/
 
   @override
   Widget build(BuildContext context) {
@@ -94,12 +93,12 @@ class _EmailVerifyState extends State<EmailVerify> {
                       if(kod.text!=null){
                         bool ans= true;/*await AuthClient().postConfirmEmail(widget.email, kod.text);*/
                         if(ans){
-                          showToast();
+                          // showToast();
                           AutoRouter.of(context).replace(const SignInRoute());
                         }else{
-                          cancelToast('Неправильный код!');
+                          // cancelToast('Неправильный код!');
                         }}else{
-                        cancelToast('Введите код!');
+                        // cancelToast('Введите код!');
                       }
                       },
                     child: Ink(

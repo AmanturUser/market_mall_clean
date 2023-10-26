@@ -2,8 +2,6 @@ part of 'auto_route.dart';
 
 
 abstract class _$AppRouter extends RootStackRouter{
-  _$AppRouter({super.navigatorKey});
-
   @override
   final Map<String, PageFactory> pagesMap={
     SplashRoute.name: (routeData){
@@ -36,10 +34,10 @@ abstract class _$AppRouter extends RootStackRouter{
         child: const SignUpScreen(),
       );
     },
-    DashBoardRoute.name: (routeData) {
+    DashboardRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const DashBoard(),
+        child: const Dashboard(),
       );
     },
   };
@@ -83,9 +81,9 @@ class ProductListRoute extends PageRouteInfo<void>{
   const ProductListRoute({List<PageRouteInfo>? children}): super(ProductListRoute.name,initialChildren: children);
 }
 
-class DashBoardRoute extends PageRouteInfo<void>{
-  static const String name='DashBoard';
+class DashboardRoute extends PageRouteInfo<void>{
+  static const String name='Dashboard';
   static const PageInfo<void> page=PageInfo<void>(name);
-  const DashBoardRoute({List<PageRouteInfo>? children}): super(DashBoardRoute.name,initialChildren: children);
+  const DashboardRoute({List<PageRouteInfo>? children}): super(DashboardRoute.name,initialChildren: children);
 }
 

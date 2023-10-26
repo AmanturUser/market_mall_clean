@@ -16,6 +16,7 @@ class ProductsPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: BlocBuilder<ProductBloc, ProductState>(
+        bloc: productBloc,
         builder: (context, state) {
           if (state is LoadingProductState) {
             return Center(child: CircularProgressIndicator());

@@ -26,7 +26,7 @@ class AuthSourse implements IAuthSourse {
     print(signInPath);
     final response = await http.post(
       uri,
-      headers: {'Content-Type': 'application/json'},
+      headers: headers,
       body: jsonEncode(json),
     );
     if (response.statusCode == 200) {
@@ -54,7 +54,7 @@ class AuthSourse implements IAuthSourse {
     );
     final response = await http.post(
       uri,
-      headers: {'Content-Type': 'application/json'},
+      headers: headers,
       body: jsonEncode(json),
     );
     if (response.statusCode == 200) {
